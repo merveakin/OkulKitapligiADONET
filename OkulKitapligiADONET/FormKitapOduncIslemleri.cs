@@ -1,5 +1,6 @@
 ﻿using OkulKitapligiADONET_BLL;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -89,7 +90,32 @@ namespace OkulKitapligiADONET
 
                 if (kontrol)
                 {
-                    MessageBox.Show("INSERT İLE EKLEME YAPILACAK.");
+                    //'2021-12-17 10:30'
+                    string baslangicTarihi = "'" + dateTimePickerBaslangic.Value.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                    string bitisTarihi = "'" + dateTimePickerBitis.Value.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+
+
+                    Hashtable htVeri = new Hashtable();
+                    htVeri.Add("OgrId", (int)comboBoxOgrenci.SelectedValue);
+                    htVeri.Add("KitapId", (int)comboBoxKitap.SelectedValue);
+                    htVeri.Add("OduncAldigiTarihi", baslangicTarihi);
+                    htVeri.Add("OduncBitisTarihi", bitisTarihi);
+
+                    if (kitapOduncIslemManager.OduncKitapKaydiniYap("Islem",htVeri))
+                    {
+                        MessageBox.Show("Ödünç alma işleminiz başarıyla kayıt edilmiştir.");
+                        //temizlik
+                        GridViewiAyarlaveDoldur();
+                        OgrenciGroupBoxTemizle();
+                        KitapGroupBoxPasifYap();
+                        OduncTarihGroupBoxPasifYap();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("HATA : Kayıt eklenirken beklenmedik bir hata oluştu!");
+                    }
+
                 }
 
                 else
@@ -117,7 +143,12 @@ namespace OkulKitapligiADONET
 
             dataGridViewOduncKitaplar.Columns["IslemId"].Visible = false;
 
-            //datagrid view düzenlensin.....
+            //datagridview Width eklendi.
+
+            for (int i = 0; i < dataGridViewOduncKitaplar.Columns.Count; i++)
+            {
+                dataGridViewOduncKitaplar.Columns[i].Width = 160;
+            }
 
         }
 
@@ -202,6 +233,11 @@ namespace OkulKitapligiADONET
             dateTimePickerBitis.MaxDate =
                 dateTimePickerBaslangic.Value.AddMonths(3);
 
+
+        }
+
+        private void groupBoxOduncTarihler_Enter(object sender, EventArgs e)
+        {
 
         }
     }

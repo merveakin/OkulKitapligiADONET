@@ -34,12 +34,12 @@ namespace OkulKitapligiADONET
             this.groupBoxOgrenci = new System.Windows.Forms.GroupBox();
             this.groupBoxKitap = new System.Windows.Forms.GroupBox();
             this.groupBoxOduncTarihler = new System.Windows.Forms.GroupBox();
-            this.UC_MyButtonOduncAl = new OkulKitapligiADONET.UC_MyButton();
             this.dateTimePickerBitis = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerBaslangic = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewOduncKitaplar = new System.Windows.Forms.DataGridView();
+            this.UC_MyButtonOduncAl = new OkulKitapligiADONET.UC_MyButton();
             this.groupBoxOgrenci.SuspendLayout();
             this.groupBoxKitap.SuspendLayout();
             this.groupBoxOduncTarihler.SuspendLayout();
@@ -51,7 +51,7 @@ namespace OkulKitapligiADONET
             this.comboBoxOgrenci.FormattingEnabled = true;
             this.comboBoxOgrenci.Location = new System.Drawing.Point(22, 46);
             this.comboBoxOgrenci.Name = "comboBoxOgrenci";
-            this.comboBoxOgrenci.Size = new System.Drawing.Size(332, 24);
+            this.comboBoxOgrenci.Size = new System.Drawing.Size(419, 24);
             this.comboBoxOgrenci.TabIndex = 0;
             this.comboBoxOgrenci.SelectedIndexChanged += new System.EventHandler(this.comboBoxOgrenci_SelectedIndexChanged);
             // 
@@ -60,7 +60,7 @@ namespace OkulKitapligiADONET
             this.comboBoxKitap.FormattingEnabled = true;
             this.comboBoxKitap.Location = new System.Drawing.Point(22, 54);
             this.comboBoxKitap.Name = "comboBoxKitap";
-            this.comboBoxKitap.Size = new System.Drawing.Size(332, 24);
+            this.comboBoxKitap.Size = new System.Drawing.Size(419, 24);
             this.comboBoxKitap.TabIndex = 1;
             this.comboBoxKitap.SelectedIndexChanged += new System.EventHandler(this.comboBoxKitap_SelectedIndexChanged);
             // 
@@ -70,7 +70,7 @@ namespace OkulKitapligiADONET
             this.groupBoxOgrenci.Controls.Add(this.comboBoxOgrenci);
             this.groupBoxOgrenci.Location = new System.Drawing.Point(12, 34);
             this.groupBoxOgrenci.Name = "groupBoxOgrenci";
-            this.groupBoxOgrenci.Size = new System.Drawing.Size(379, 119);
+            this.groupBoxOgrenci.Size = new System.Drawing.Size(477, 119);
             this.groupBoxOgrenci.TabIndex = 2;
             this.groupBoxOgrenci.TabStop = false;
             this.groupBoxOgrenci.Text = "Öğrenci Seçiniz :";
@@ -81,7 +81,7 @@ namespace OkulKitapligiADONET
             this.groupBoxKitap.Controls.Add(this.comboBoxKitap);
             this.groupBoxKitap.Location = new System.Drawing.Point(12, 159);
             this.groupBoxKitap.Name = "groupBoxKitap";
-            this.groupBoxKitap.Size = new System.Drawing.Size(379, 120);
+            this.groupBoxKitap.Size = new System.Drawing.Size(477, 120);
             this.groupBoxKitap.TabIndex = 1;
             this.groupBoxKitap.TabStop = false;
             this.groupBoxKitap.Text = "Kitap Seçiniz :";
@@ -94,27 +94,20 @@ namespace OkulKitapligiADONET
             this.groupBoxOduncTarihler.Controls.Add(this.label2);
             this.groupBoxOduncTarihler.Controls.Add(this.label1);
             this.groupBoxOduncTarihler.Controls.Add(this.dateTimePickerBaslangic);
-            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(397, 34);
+            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(514, 34);
             this.groupBoxOduncTarihler.Name = "groupBoxOduncTarihler";
-            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(294, 245);
+            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(421, 245);
             this.groupBoxOduncTarihler.TabIndex = 2;
             this.groupBoxOduncTarihler.TabStop = false;
             this.groupBoxOduncTarihler.Text = "Tarihleri Seçiniz :";
-            // 
-            // UC_MyButtonOduncAl
-            // 
-            this.UC_MyButtonOduncAl.Location = new System.Drawing.Point(9, 179);
-            this.UC_MyButtonOduncAl.Margin = new System.Windows.Forms.Padding(4);
-            this.UC_MyButtonOduncAl.Name = "UC_MyButtonOduncAl";
-            this.UC_MyButtonOduncAl.Size = new System.Drawing.Size(234, 41);
-            this.UC_MyButtonOduncAl.TabIndex = 6;
+            this.groupBoxOduncTarihler.Enter += new System.EventHandler(this.groupBoxOduncTarihler_Enter);
             // 
             // dateTimePickerBitis
             // 
             this.dateTimePickerBitis.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerBitis.Location = new System.Drawing.Point(9, 135);
             this.dateTimePickerBitis.Name = "dateTimePickerBitis";
-            this.dateTimePickerBitis.Size = new System.Drawing.Size(234, 22);
+            this.dateTimePickerBitis.Size = new System.Drawing.Size(340, 22);
             this.dateTimePickerBitis.TabIndex = 5;
             // 
             // label2
@@ -140,7 +133,7 @@ namespace OkulKitapligiADONET
             this.dateTimePickerBaslangic.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerBaslangic.Location = new System.Drawing.Point(9, 58);
             this.dateTimePickerBaslangic.Name = "dateTimePickerBaslangic";
-            this.dateTimePickerBaslangic.Size = new System.Drawing.Size(234, 22);
+            this.dateTimePickerBaslangic.Size = new System.Drawing.Size(340, 22);
             this.dateTimePickerBaslangic.TabIndex = 3;
             this.dateTimePickerBaslangic.ValueChanged += new System.EventHandler(this.dateTimePickerBaslangic_ValueChanged);
             // 
@@ -155,14 +148,22 @@ namespace OkulKitapligiADONET
             this.dataGridViewOduncKitaplar.ReadOnly = true;
             this.dataGridViewOduncKitaplar.RowHeadersWidth = 51;
             this.dataGridViewOduncKitaplar.RowTemplate.Height = 24;
-            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(679, 304);
+            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(923, 304);
             this.dataGridViewOduncKitaplar.TabIndex = 0;
+            // 
+            // UC_MyButtonOduncAl
+            // 
+            this.UC_MyButtonOduncAl.Location = new System.Drawing.Point(9, 179);
+            this.UC_MyButtonOduncAl.Margin = new System.Windows.Forms.Padding(4);
+            this.UC_MyButtonOduncAl.Name = "UC_MyButtonOduncAl";
+            this.UC_MyButtonOduncAl.Size = new System.Drawing.Size(340, 41);
+            this.UC_MyButtonOduncAl.TabIndex = 6;
             // 
             // FormKitapOduncIslemleri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 620);
+            this.ClientSize = new System.Drawing.Size(967, 620);
             this.Controls.Add(this.dataGridViewOduncKitaplar);
             this.Controls.Add(this.groupBoxOduncTarihler);
             this.Controls.Add(this.groupBoxKitap);
