@@ -1,4 +1,5 @@
-﻿using OkulKitapligiADONET_DAL;
+﻿using OkulKitapligiADONET_BLL.ViewModels;
+using OkulKitapligiADONET_DAL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -56,6 +57,49 @@ namespace OkulKitapligiADONET_BLL
 
                 throw ex;
             }
+        }
+
+        public List<IslemViewModel> GrideVerileriViewModelleGetir()
+        {
+            List<IslemViewModel> data = new List<IslemViewModel>();
+
+            try
+            {
+                DataTable theData = new DataTable();
+                theData = myPocketDAL.GetTheData("select i.IslemId, k.KitapId, o.OgrId, CONCAT(o.OgrAd, ' ', o.OgrSoyad) as OgrenciAdSoyad, k.KitapAd, i.OduncAldigiTarihi, i.OduncBitisTarihi, i.TeslimEdildiMi from  Islem i inner join Kitaplar k on k.KitapId = i.KitapId inner join Ogrenciler o on o.OgrId = i.OgrId");
+
+                //veriler dataTable ile geldi. Ama o verileri tek tek döngü ile dönerken içindeki verileri viewmodel'e aktaralım.
+
+                for (int i = 0; i < theData.Rows.Count; i++)
+                {
+                    DataRow satir = theData.Rows[i];
+
+                    IslemViewModel veri = new IslemViewModel()
+                    {
+                        IslemId = (int)theData.Rows[i].ItemArray[0],
+                        KitapId = (int)theData.Rows[i].ItemArray[1],
+                        OgrId = (int)theData.Rows[i].ItemArray[2],
+                        OgrenciAdSoyad = theData.Rows[i].ItemArray[3].ToString(),
+                        KitapAd = theData.Rows[i].ItemArray[4].ToString(),
+                        OduncAldigiTarihi=Convert.ToDateTime(theData.Rows[i].ItemArray[5]),
+                        OduncBitisTarihi=Convert.ToDateTime(theData.Rows[i].ItemArray[6]),
+                        TeslimEdildiMi=(bool)theData.Rows[i].ItemArray[7]
+                    };
+
+                    //IslemViewModels tipindeki veri isimli nesne IslemViewModels tipine sahip listeye eklenecek.
+                    data.Add(veri); //ekledik.
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+            return data;
         }
 
         public int KitabinStogunuGetir(int kitapId)
@@ -133,9 +177,9 @@ namespace OkulKitapligiADONET_BLL
                     komutcumleleri[0] = "update Kitaplar Set Stok=" + stokAdet + " where KitapId=" + kitapId;
 
                     //CreateUpdateAsString isimli metodunu kullanmak amacıyla hashtable yapacağız.
-                    //Kullanmak istemezsek 2. Komut cümlesini yukarıdaki gibi ekleyebiliriz.
+                    //Kullanmak istemezsek 2.Komut cümlesini yukarıdaki gibi ekleyebiliriz.
 
-                    //  komutcumleleri[1] = "update Islem Set TeslimEdildiMi=1, OduncBitisTarihi='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + 'where IslemId=' + islemId;
+                    //komutcumleleri[1] = "update Islem Set TeslimEdildiMi=1,OduncBitisTarihi='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where IslemId=" + islemId;
 
                     Hashtable htVeri = new Hashtable();
 
@@ -143,8 +187,8 @@ namespace OkulKitapligiADONET_BLL
                         + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                         + "'";
 
-                    htVeri.Add("TeslimEdildiMi","1");
-                    htVeri.Add("OduncBitisTarihi",bitisTarihi);
+                    htVeri.Add("TeslimEdildiMi", "1");
+                    htVeri.Add("OduncBitisTarihi", bitisTarihi);
                     string kosulum = "IslemId=" + islemId;
                     komutcumleleri[1] = myPocketDAL.CreateUpdateQueryAsString("Islem", htVeri, kosulum);
 

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OkulKitapligiADONET_BLL.ViewModels;
+
 
 namespace OkulKitapligiADONET
 {
@@ -138,14 +140,35 @@ namespace OkulKitapligiADONET
             dataGridViewOduncKitaplar.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
 
-            dataGridViewOduncKitaplar.DataSource =
-                kitapOduncIslemManager.GrideVerileriGetir();
 
+            //datagridview'in datasource una veriler datatable ile geldi.
+            //--------------------
+
+            //dataGridViewOduncKitaplar.DataSource =
+            //    kitapOduncIslemManager.GrideVerileriGetir();
+
+            //dataGridViewOduncKitaplar.Columns["IslemId"].Visible = false;
+            //dataGridViewOduncKitaplar.Columns["KitapId"].Visible = false;
+
+            //--------------------
+
+            //datagridview'in dataSource'una veriler viewmodel ile geldi..
+            List<IslemViewModel> list =
+                kitapOduncIslemManager.GrideVerileriViewModelleGetir();
+
+            dataGridViewOduncKitaplar.DataSource = list;
             dataGridViewOduncKitaplar.Columns["IslemId"].Visible = false;
             dataGridViewOduncKitaplar.Columns["KitapId"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["OgrId"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["TeslimEdildiMi"].Visible = false;
+            //istediğiniz kolonun header text'ini düzenleyebiliriz.
+            dataGridViewOduncKitaplar.Columns["TeslimEdildiMiString"].HeaderText = "Teslim Durumu";
+            dataGridViewOduncKitaplar.Columns["OduncAldigiTarihi"].HeaderText = "Öd. Baş. Tarih";
+            dataGridViewOduncKitaplar.Columns["OduncBitisTarihi"].HeaderText = "Öd. Bitiş Tarih";
+
+
 
             //datagridview Width eklendi.
-
             for (int i = 0; i < dataGridViewOduncKitaplar.Columns.Count; i++)
             {
                 dataGridViewOduncKitaplar.Columns[i].Width = 160;

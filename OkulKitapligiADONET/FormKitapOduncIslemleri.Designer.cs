@@ -98,9 +98,9 @@ namespace OkulKitapligiADONET
             this.groupBoxOduncTarihler.Controls.Add(this.label2);
             this.groupBoxOduncTarihler.Controls.Add(this.label1);
             this.groupBoxOduncTarihler.Controls.Add(this.dateTimePickerBaslangic);
-            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(514, 34);
+            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(605, 34);
             this.groupBoxOduncTarihler.Name = "groupBoxOduncTarihler";
-            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(421, 245);
+            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(489, 245);
             this.groupBoxOduncTarihler.TabIndex = 2;
             this.groupBoxOduncTarihler.TabStop = false;
             this.groupBoxOduncTarihler.Text = "Tarihleri Seçiniz :";
@@ -152,7 +152,7 @@ namespace OkulKitapligiADONET
             this.dataGridViewOduncKitaplar.ReadOnly = true;
             this.dataGridViewOduncKitaplar.RowHeadersWidth = 51;
             this.dataGridViewOduncKitaplar.RowTemplate.Height = 24;
-            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(923, 304);
+            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(1082, 304);
             this.dataGridViewOduncKitaplar.TabIndex = 0;
             // 
             // UC_MyButtonOduncAl
@@ -169,7 +169,7 @@ namespace OkulKitapligiADONET
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kitabiTeslimEtToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 28);
             // 
             // kitabiTeslimEtToolStripMenuItem
             // 
@@ -182,7 +182,7 @@ namespace OkulKitapligiADONET
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 620);
+            this.ClientSize = new System.Drawing.Size(1143, 620);
             this.Controls.Add(this.dataGridViewOduncKitaplar);
             this.Controls.Add(this.groupBoxOduncTarihler);
             this.Controls.Add(this.groupBoxKitap);
