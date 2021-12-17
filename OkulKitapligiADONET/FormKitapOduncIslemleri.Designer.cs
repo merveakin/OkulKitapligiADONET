@@ -29,6 +29,7 @@ namespace OkulKitapligiADONET
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBoxOgrenci = new System.Windows.Forms.ComboBox();
             this.comboBoxKitap = new System.Windows.Forms.ComboBox();
             this.groupBoxOgrenci = new System.Windows.Forms.GroupBox();
@@ -40,10 +41,13 @@ namespace OkulKitapligiADONET
             this.dateTimePickerBaslangic = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewOduncKitaplar = new System.Windows.Forms.DataGridView();
             this.UC_MyButtonOduncAl = new OkulKitapligiADONET.UC_MyButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.kitabiTeslimEtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOgrenci.SuspendLayout();
             this.groupBoxKitap.SuspendLayout();
             this.groupBoxOduncTarihler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOduncKitaplar)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxOgrenci
@@ -159,6 +163,21 @@ namespace OkulKitapligiADONET
             this.UC_MyButtonOduncAl.Size = new System.Drawing.Size(340, 41);
             this.UC_MyButtonOduncAl.TabIndex = 6;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kitabiTeslimEtToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            // 
+            // kitabiTeslimEtToolStripMenuItem
+            // 
+            this.kitabiTeslimEtToolStripMenuItem.Name = "kitabiTeslimEtToolStripMenuItem";
+            this.kitabiTeslimEtToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.kitabiTeslimEtToolStripMenuItem.Text = "Kitabı Teslim Et";
+            this.kitabiTeslimEtToolStripMenuItem.Click += new System.EventHandler(this.kitabiTeslimEtToolStripMenuItem_Click);
+            // 
             // FormKitapOduncIslemleri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -176,6 +195,7 @@ namespace OkulKitapligiADONET
             this.groupBoxOduncTarihler.ResumeLayout(false);
             this.groupBoxOduncTarihler.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOduncKitaplar)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -193,5 +213,7 @@ namespace OkulKitapligiADONET
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerBaslangic;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem kitabiTeslimEtToolStripMenuItem;
     }
 }

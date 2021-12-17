@@ -25,7 +25,7 @@ namespace OkulKitapligiADONET_BLL
             {
                 throw ex;
             }
-            
+
         }
 
         public DataTable TumOgrencileriGetir()
@@ -47,7 +47,7 @@ namespace OkulKitapligiADONET_BLL
             try
             {
                 DataTable data = new DataTable();
-                data = myPocketDAL.GetTheData("select i.IslemId, CONCAT(o.OgrAd, ' ', o.OgrSoyad) as OgrenciAdSoyad, k.KitapAd,i.OduncAldigiTarihi,i.OduncBitisTarihi from Islem i inner join Kitaplar k on k.KitapId=i.KitapId inner join Ogrenciler o on o.OgrId=i.OgrId");
+                data = myPocketDAL.GetTheData("select i.IslemId, i.KitapId, CONCAT(o.OgrAd, ' ', o.OgrSoyad) as OgrenciAdSoyad, k.KitapAd,i.OduncAldigiTarihi,i.OduncBitisTarihi from Islem i inner join Kitaplar k on k.KitapId=i.KitapId inner join Ogrenciler o on o.OgrId=i.OgrId");
 
                 return data;
             }
@@ -94,9 +94,9 @@ namespace OkulKitapligiADONET_BLL
                     string updateCumlesi = "Update Kitaplar set Stok=" + stokAdeti + " where KitapId=" + htVeri["KitapId"];
 
                     //Ödünç
-                    string insertCumlesi = myPocketDAL.CreateInsertQueryAsString(tableName,htVeri);
+                    string insertCumlesi = myPocketDAL.CreateInsertQueryAsString(tableName, htVeri);
 
-                    sonuc = myPocketDAL.ExecuteTheQueriesWithTransaction(insertCumlesi,updateCumlesi);
+                    sonuc = myPocketDAL.ExecuteTheQueriesWithTransaction(insertCumlesi, updateCumlesi);
 
 
                 }
@@ -119,5 +119,51 @@ namespace OkulKitapligiADONET_BLL
             return sonuc;
         }
 
+        public bool OduncKitapTeslimEt(string tableName, int islemId, int kitapId)
+        {
+            bool sonuc = false;
+            try
+            {
+                //Stok
+                object stokAdet = myPocketDAL.GetTheDataByExecuteScalar("select Stok from Kitaplar where KitapId=" + kitapId);
+                if (stokAdet!=null)
+                {
+                    stokAdet = (int)stokAdet + 1;
+                    string[] komutcumleleri = new string[2];
+                    komutcumleleri[0] = "update Kitaplar Set Stok=" + stokAdet + " where KitapId=" + kitapId;
+
+                    //CreateUpdateAsString isimli metodunu kullanmak amacıyla hashtable yapacağız.
+                    //Kullanmak istemezsek 2. Komut cümlesini yukarıdaki gibi ekleyebiliriz.
+
+                    //  komutcumleleri[1] = "update Islem Set TeslimEdildiMi=1, OduncBitisTarihi='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + 'where IslemId=' + islemId;
+
+                    Hashtable htVeri = new Hashtable();
+
+                    string bitisTarihi = "'"
+                        + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                        + "'";
+
+                    htVeri.Add("TeslimEdildiMi","1");
+                    htVeri.Add("OduncBitisTarihi",bitisTarihi);
+                    string kosulum = "IslemId=" + islemId;
+                    komutcumleleri[1] = myPocketDAL.CreateUpdateQueryAsString("Islem", htVeri, kosulum);
+
+                    sonuc = myPocketDAL.ExecuteTheQueriesWithTransaction(komutcumleleri);
+                }
+
+                else
+                {
+                    throw new Exception("HATA : Stok adeti çekilemediği için hata oluştu!");
+                }
+
+                return sonuc;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
     }
 }

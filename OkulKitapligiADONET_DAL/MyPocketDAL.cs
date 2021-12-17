@@ -183,7 +183,7 @@ namespace OkulKitapligiADONET_DAL
             string retVal = string.Empty;
 
             string theSet = string.Empty;
-            foreach (string theKey in htData)
+            foreach (string theKey in htData.Keys)
             {
                 //KitapAd = 'Yeni Kitap' --> yeni htData'daki anahtarı ve değerini yan yana almam gerekli.
 

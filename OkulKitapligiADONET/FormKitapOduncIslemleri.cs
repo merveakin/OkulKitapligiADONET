@@ -101,7 +101,7 @@ namespace OkulKitapligiADONET
                     htVeri.Add("OduncAldigiTarihi", baslangicTarihi);
                     htVeri.Add("OduncBitisTarihi", bitisTarihi);
 
-                    if (kitapOduncIslemManager.OduncKitapKaydiniYap("Islem",htVeri))
+                    if (kitapOduncIslemManager.OduncKitapKaydiniYap("Islem", htVeri))
                     {
                         MessageBox.Show("Ödünç alma işleminiz başarıyla kayıt edilmiştir.");
                         //temizlik
@@ -142,6 +142,7 @@ namespace OkulKitapligiADONET
                 kitapOduncIslemManager.GrideVerileriGetir();
 
             dataGridViewOduncKitaplar.Columns["IslemId"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["KitapId"].Visible = false;
 
             //datagridview Width eklendi.
 
@@ -149,6 +150,8 @@ namespace OkulKitapligiADONET
             {
                 dataGridViewOduncKitaplar.Columns[i].Width = 160;
             }
+
+            dataGridViewOduncKitaplar.ContextMenuStrip = contextMenuStrip1;
 
         }
 
@@ -239,6 +242,49 @@ namespace OkulKitapligiADONET
         private void groupBoxOduncTarihler_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void kitabiTeslimEtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //veri tabanına aşağıdaki sorgu ile yeni alan eklendi
+            //alter table Islem
+            //add TeslimEdildiMi bit not null default 0
+
+            try
+            {
+                //datagridview'de seçilen satır alınacak
+                //O satırdaki islemId ve kitapId alınacak 
+
+                DataGridViewRow secilenSatir = dataGridViewOduncKitaplar.SelectedRows[0];
+                //islemId
+                int islemId = (int)secilenSatir.Cells["IslemId"].Value;
+
+                //kitapId
+                int kitapId = (int)secilenSatir.Cells["kitapId"].Value;
+
+                bool teslimSonuc = false;
+                teslimSonuc = kitapOduncIslemManager.OduncKitapTeslimEt("Islem", islemId, kitapId);
+
+                if (teslimSonuc)
+                {
+                    MessageBox.Show("Teşekkürler... Kitap teslim alındı...");
+                    //temizlik
+                    GridViewiAyarlaveDoldur();
+                    OgrenciGroupBoxTemizle();
+                    KitapGroupBoxPasifYap();
+                    OduncTarihGroupBoxPasifYap();
+                }
+
+                else
+                {
+                    MessageBox.Show("HATA : Kitap teslim edilemedi!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("HATA : Bir hata oluştu!" + ex.Message + " " + ex.ToString());
+            }
         }
     }
 }
